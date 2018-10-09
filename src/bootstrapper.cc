@@ -3,6 +3,10 @@
 #include "node_internals.h"
 #include "v8.h"
 
+#if HAVE_OPENSSL
+#include "node_crypto.h"
+#endif
+
 #include <atomic>
 
 namespace node {
@@ -152,6 +156,10 @@ void SetupBootstrapObject(Environment* env,
   BOOTSTRAP_METHOD(_memoryUsage, MemoryUsage);
   BOOTSTRAP_METHOD(_rawDebug, RawDebug);
   BOOTSTRAP_METHOD(_umask, Umask);
+
+#if HAVE_OPENSSL
+  BOOTSTRAP_METHOD(_loadExtraRootCertsFile, crypto::LoadExtraRootCertsFile);
+#endif
 
 #if defined(__POSIX__) && !defined(__ANDROID__) && !defined(__CloudABI__)
   if (env->is_main_thread()) {

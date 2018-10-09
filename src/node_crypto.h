@@ -680,6 +680,7 @@ class ECDH : public BaseObject {
 };
 
 bool EntropySource(unsigned char* buffer, size_t length);
+void LoadExtraRootCertsFile(const v8::FunctionCallbackInfo<v8::Value>& args);
 #ifndef OPENSSL_NO_ENGINE
 void SetEngine(const v8::FunctionCallbackInfo<v8::Value>& args);
 #endif  // !OPENSSL_NO_ENGINE
