@@ -119,7 +119,7 @@ FileHandle::FileHandle(Environment* env, int fd, Local<Object> obj)
   v8::PropertyAttribute attr =
       static_cast<v8::PropertyAttribute>(v8::ReadOnly | v8::DontDelete);
   object()->DefineOwnProperty(env->context(),
-                              FIXED_ONE_BYTE_STRING(env->isolate(), "fd"),
+                              env->fd_string(),
                               Integer::New(env->isolate(), fd),
                               attr).FromJust();
 }

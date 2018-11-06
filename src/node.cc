@@ -953,7 +953,7 @@ void ReportException(Environment* env,
     if (er->IsObject()) {
       Local<Object> err_obj = er.As<Object>();
       message = err_obj->Get(env->message_string());
-      name = err_obj->Get(FIXED_ONE_BYTE_STRING(env->isolate(), "name"));
+      name = err_obj->Get(env->name_string());
     }
 
     if (message.IsEmpty() ||
@@ -1624,8 +1624,7 @@ static void GetLinkedBinding(const FunctionCallbackInfo<Value>& args) {
 
   Local<Object> module = Object::New(env->isolate());
   Local<Object> exports = Object::New(env->isolate());
-  Local<String> exports_prop = String::NewFromUtf8(env->isolate(), "exports",
-      NewStringType::kNormal).ToLocalChecked();
+  Local<String> exports_prop = env->exports_string();
   module->Set(exports_prop, exports);
 
   if (mod->nm_context_register_func != nullptr) {

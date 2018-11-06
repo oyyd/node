@@ -495,7 +495,7 @@ void InitWorker(Local<Object> target,
 
   env->SetMethod(target, "getEnvMessagePort", GetEnvMessagePort);
 
-  auto thread_id_string = FIXED_ONE_BYTE_STRING(env->isolate(), "threadId");
+  auto thread_id_string = env->thread_id_string();
   target->Set(env->context(),
               thread_id_string,
               Number::New(env->isolate(),
